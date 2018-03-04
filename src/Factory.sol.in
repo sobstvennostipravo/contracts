@@ -1,0 +1,57 @@
+pragma solidity ^0.4.17;
+
+
+import "siplib.sol";
+import "Ownable.sol";
+import "ActionChain.sol";
+
+contract Factory is Ownable {
+    bytes32[] public rawLinks;
+//DBG    event Debug(string factory_string_part, address factory_address_part);
+
+    function Factory() onlyOwner public {
+//TMPL %for a_worker in workers:
+//TMPL         rawLinks.push(SipLib.bytes32FromLink(SipLib.Link({
+//TMPL                       addr : ${a_worker["address"]},
+//TMPL                       microEtherPrice : ${a_worker["micro_ether_price"]},
+//TMPL                       tokenPrice : ${a_worker["token_price"]},
+//TMPL                       timeout : 0})));
+//TMPL %endfor
+    }
+
+    function makeAction()  payable public returns(address) {
+        address ac = (new ActionChain).value(msg.value)(rawLinks);
+//DBG         Debug("chain has address", ac);
+        return ac;
+    }
+
+    /* link management */
+    function remove(uint ind) onlyOwner public {
+        if (ind >= rawLinks.length) return;
+
+        for (uint i = ind; i<rawLinks.length-1; i++){
+            rawLinks[i] = rawLinks[i+1];
+        }
+        delete rawLinks[rawLinks.length-1];
+        rawLinks.length--;
+    }
+
+    function setLink(uint ind, bytes32 val) onlyOwner public {
+        if (ind >= rawLinks.length) return;
+        rawLinks[ind] = val;
+    }
+
+    function insert(uint ind, bytes32 val) onlyOwner public {
+        rawLinks.length++;
+
+        for (uint i = ind; i<rawLinks.length; i++){
+            rawLinks[i+1] = rawLinks[i];
+        }
+
+        rawLinks[ind] = val;
+    }
+
+    function addLink(bytes32 val) onlyOwner public {
+        rawLinks.push(val);
+    }
+}

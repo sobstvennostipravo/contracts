@@ -1,0 +1,33 @@
+pragma solidity ^0.4.17;
+
+import "Ownable.sol";
+
+interface ActionChainI {
+    function jobDone(bytes32[] _data) public;
+}
+
+contract Worker is Ownable {
+//DBG        event Debug(string string_part, uint uint_part);
+
+    event jobReceived(address boss, bytes32[] arg);
+
+
+    /* address public ths; */
+    /* bytes32 public street_address; */
+
+    function Worker() public {
+        /* ths = this; */
+    }
+
+    function jobStart(bytes32[] arg) payable public {
+//DBG        Debug("jobStart", 0);
+        jobReceived(msg.sender, arg);
+    }
+
+    // call must be restricted by backend
+    function jobDone(address boss, bytes32[] arg) onlyOwner public {
+//    have to call ActionChain's method
+//DBG            Debug("jobDone", 0);
+        ActionChainI(boss).jobDone(arg);
+    }
+}
