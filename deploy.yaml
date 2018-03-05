@@ -170,9 +170,9 @@ root:
     Lg==
   address: '0x050a09A0b29E6d68DC50593d46C9a207FfCf099E'
   sources: [Root.sol.in]
-settings: {fields_json: /home/ilejn/projects/sip/fields.json, provider: /home/ilejn/.ethereum/testnet/geth.ipc,
-  rule_file: /home/ilejn/projects/sip/rule.csv, sip_api: 'http://localhost:8008',
-  upload_folder: /home/ilejn/area}
+settings: {fields_json: '/home/ilejn/projects/sip/fields.json', provider: '/home/ilejn/.ethereum/testnet/geth.ipc',
+  rule_file: '/home/ilejn/projects/sip/rule.csv', sip_api: 'http://localhost:8008',
+  upload_folder: '/home/ilejn/area', secret_key: 'ZZ-very-secret-key-AA'}
 token:
   abi: !!binary |
     gANdcQAofXEBKFgEAAAAbmFtZXECWA8AAABtaW50aW5nRmluaXNoZWRxA1gIAAAAY29uc3RhbnRx
