@@ -1,6 +1,6 @@
 pragma solidity ^0.4.17;
 
-import "Ownable.sol";
+import "common/Ownable.sol";
 
 interface ActionChainI {
     function jobDone(bytes32[] _data) public;
