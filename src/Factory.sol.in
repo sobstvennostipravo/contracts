@@ -20,8 +20,9 @@ contract Factory is Ownable {
     }
 
     function makeAction()  payable public returns(address) {
-        address ac = (new ActionChain).value(msg.value)(rawLinks);
+        address ac = (new ActionChain).value(msg.value)();
 //DBG         Debug("chain has address", ac);
+        ActionChain(ac).setLinks(rawLinks);
         return ac;
     }
 
