@@ -2,7 +2,7 @@ pragma solidity ^0.4.17;
 
 
 import "siplib.sol";
-import "Ownable.sol";
+import "common/Ownable.sol";
 import "ActionChain.sol";
 
 contract Factory is Ownable {
@@ -24,6 +24,7 @@ contract Factory is Ownable {
 //DBG         Debug("chain has address", ac);
         ActionChain(ac).setLinks(rawLinks);
         return ac;
+
     }
 
     /* link management */

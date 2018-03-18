@@ -1,6 +1,7 @@
 import yaml
 import solcwrap
 import pickle
+import os
 
 def main(yaml_fname, provider):
 
@@ -9,6 +10,8 @@ def main(yaml_fname, provider):
 
     if y["token"]["address"] == "UNDEFINED":
 
+        cwd = os.getcwd()
+        os.chdir('../token')
         (contract_address, abi) = solcwrap.tmpl('PRAVOToken', provider, {})
 
         y["token"]["address"] = contract_address
@@ -17,6 +20,7 @@ def main(yaml_fname, provider):
 
         with open(yaml_fname, "w") as f:
             yaml.dump(y, f)
+        os.chdir(cwd)
 
 if __name__ == "__main__":
     main("deploy.yaml", 'http://localhost:8545')

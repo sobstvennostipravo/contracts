@@ -50,9 +50,9 @@ contract Root is Ownable {
 //DBG        Debug("", fabrique.microEtherPrice);
         /* require (paymentsMap[client_address].val >= fabrique.microEtherPrice); */
         /* enoughTokens(client_address, fabrique.tokenPrice); */
-        delete contractsMap[client_address];
+        contractsMap[client_address] = 0;
 //DBG        Debug("before makeAction", 0);
-        address contract_address = FactoryI(fabrique.addr).makeAction.value(fabrique.microEtherPrice * 10 szabo)();
+        address contract_address = FactoryI(fabrique.addr).makeAction.value(fabrique.microEtherPrice * 1 szabo)();
 //DBG        Debug("after makeAction", 0);
 
         if (paymentsMap[client_address].val > fabrique.microEtherPrice) {
@@ -66,8 +66,8 @@ contract Root is Ownable {
         /* transferTokens(client_address, contract_address, fabrique.tokenPrice); */
 //DBG        Debug("after transferTokens", 0);
 
-        /* return contract_address; */
         contractsMap[client_address] = contract_address;
+        /* return contract_address; */
     }
 
     /* function buyTokens(address client_address, uint tokens) private { */
