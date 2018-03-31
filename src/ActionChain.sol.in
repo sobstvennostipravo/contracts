@@ -40,11 +40,12 @@ contract ActionChain is Ownable/* , WorkerI */ {
         for (uint i = 0; i < _links.length; i++) {
             links.push(SipLib.linkFromBytes32(_links[i]));
         }
+//DBG        Debug("setLinks", links.length);
     }
 
 
     function supplyInitialData(bytes32[] _data) public
-        atStage(Stage.Created) onlyOwner
+        atStage(Stage.Created)
     {
 //DBG        Debug("supplyInitialData", 0);
 
@@ -62,7 +63,7 @@ contract ActionChain is Ownable/* , WorkerI */ {
         atStage(Stage.Awaiting)
     {
         DoneEvent(link_num);
-        if (link_num == links.length) {
+        if (link_num >= links.length - 1) {
             stage = Stage.Completed;
             /* return ether & tokens, ? change ownership to user */
         }

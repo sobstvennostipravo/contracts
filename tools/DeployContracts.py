@@ -7,34 +7,30 @@ import DeployFactory
 import DeployWorker
 import DeployToken
 import CompileActionChain
+import DeployActionChainMonitor
 
 yaml_fname = "../deploy.yaml"
-
-
-with open(yaml_fname, 'r') as f:
-     y = yaml.load(f)
-
-
-provider = y['settings']['provider']
 
 
 # import run_backends
 os.chdir('../src')
 
 print(">token")
-DeployToken.main(yaml_fname, provider)
+DeployToken.main(yaml_fname)
 
 print(">worker")
-DeployWorker.main(yaml_fname, provider)
+DeployWorker.main(yaml_fname)
 
 print(">action_chain")
-CompileActionChain.main(yaml_fname, provider)
+CompileActionChain.main(yaml_fname)
 
 print(">factory")
-DeployFactory.main(yaml_fname, provider)
+DeployFactory.main(yaml_fname)
 
 print(">root")
-DeployRoot.main(yaml_fname, provider)
+DeployRoot.main(yaml_fname)
 
+print(">action_chain_monitor")
+DeployActionChainMonitor.main(yaml_fname)
 
 # run_backends.main(yaml_fname, provider, "SOBSTVENNOSTIPRAVO")

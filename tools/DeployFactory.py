@@ -2,7 +2,7 @@ import yaml
 import solcwrap
 import pickle
 
-def main(yaml_fname, provider):
+def main(yaml_fname):
     with open(yaml_fname, 'r') as f:
         y = yaml.load(f)
 
@@ -20,7 +20,7 @@ def main(yaml_fname, provider):
 
             mapdict['workers'] = workers
 
-            (contract_address, abi) = solcwrap.tmpl('Factory', provider, mapdict)
+            (contract_address, abi) = solcwrap.tmpl('Factory', y['settings']['provider'], mapdict)
 
             print(contract_address)
 
@@ -38,4 +38,4 @@ def main(yaml_fname, provider):
     # my_contract.call().jobStart(1000000)
 
 if __name__ == "__main__":
-    main("deploy.yaml", "http://localhost:8545")
+    main("deploy.yaml")

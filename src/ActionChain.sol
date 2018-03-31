@@ -29,15 +29,20 @@ contract ActionChain is Ownable/* , WorkerI */ {
         _;
     }
 
-    function ActionChain(bytes32[] _links) payable public
+    function ActionChain() payable public
     {
         stage = Stage.Created;
         link_num = 0;
+    }
 
+    function  setLinks(bytes32[] _links) public onlyOwner
+    {
         for (uint i = 0; i < _links.length; i++) {
             links.push(SipLib.linkFromBytes32(_links[i]));
         }
+        Debug("setLinks", links.length);
     }
+
 
     function supplyInitialData(bytes32[] _data) public
         atStage(Stage.Created)

@@ -16,7 +16,7 @@ def deploy(compiled_contract, fname_contract, provider):
         try:
             trans_receipt = web3.eth.getTransactionReceipt(trans_hash)
         except ValueError as err:
-            # print("ValueError", err)
+            print("ValueError", err)
             pass
 
         if trans_receipt:
