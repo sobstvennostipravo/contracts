@@ -10,7 +10,14 @@ def main(yaml_fname):
 
     if y["action_chain_monitor"]["address"] == "UNDEFINED":
 
-        (contract_address, abi) = solcwrap.tmpl('ActionChainMonitor', y['settings']['provider'], {})
+        mapdict = {}
+        workers = []
+        for aworker in y['factories'][0]['workers']:   # a sort of hack, we handle first Factory only
+            workers.append({"name": aworker['name']})
+
+        mapdict['workers'] = workers
+
+        (contract_address, abi) = solcwrap.tmpl('ActionChainMonitor', y['settings']['provider'], mapdict)
 
         y["action_chain_monitor"]["address"] = contract_address
         y["action_chain_monitor"]["abi"] = pickle.dumps(abi)

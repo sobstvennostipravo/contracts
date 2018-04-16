@@ -1,24 +1,24 @@
 pragma solidity ^0.4.11;
 
-import "token/PRAVOTokenI.sol";
+import "common/Ownable.sol";
+import "PRAVOTokenI.sol";
 
-
-contract PRAVOToken is PRAVOTokenI {
+contract PRAVOToken is Ownable, PRAVOTokenI {
 	string public name = "PRAVO token";
 	string public symbol = "PRAVO";
 	uint public decimals = 18;
-  event Debug(string);
 
+  /* This notifies clients about the amount burnt */
+  event Burn(address indexed from, uint value);
 
-	/* function SIP(uint256 _amount) { */
 	function PRAVOToken() public{
-    uint _amount = 1000000;
+    uint INITIAL_SUPPLY = 4000000000;
 
-		owner = msg.sender;
-		mint(owner, _amount);
+		balances[msg.sender] = INITIAL_SUPPLY;
 	}
 
-  function getRate() public returns(uint)  {
-      return 42;
+  function burn(uint burn_value) onlyOwner public {
+    balances[msg.sender] = balances[msg.sender].sub(burn_value);
+    Burn(msg.sender, burn_value);
   }
 }

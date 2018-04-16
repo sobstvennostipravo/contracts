@@ -63,7 +63,7 @@ contract ActionChain is Ownable/* , WorkerI */ {
         atStage(Stage.Awaiting)
     {
         DoneEvent(link_num);
-        if (link_num == links.length) {
+        if (link_num >= links.length - 1) {
             stage = Stage.Completed;
             /* return ether & tokens, ? change ownership to user */
         }

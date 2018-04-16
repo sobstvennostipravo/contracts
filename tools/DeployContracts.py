@@ -8,6 +8,7 @@ import DeployWorker
 import DeployToken
 import CompileActionChain
 import DeployActionChainMonitor
+import DeployCrowdSale
 
 yaml_fname = "../deploy.yaml"
 
@@ -32,5 +33,8 @@ DeployRoot.main(yaml_fname)
 
 print(">action_chain_monitor")
 DeployActionChainMonitor.main(yaml_fname)
+
+print(">crowd_sale")
+DeployCrowdSale.main(yaml_fname)
 
 # run_backends.main(yaml_fname, provider, "SOBSTVENNOSTIPRAVO")

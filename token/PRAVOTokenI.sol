@@ -1,10 +1,8 @@
 pragma solidity ^0.4.11;
 
-import "token/MintableToken.sol";
+import "StandardToken.sol";
 
-contract PRAVOTokenI is MintableToken {
+contract PRAVOTokenI is StandardToken {
 	function PRAVO() public{
-  }
-  function getRate() public returns(uint)  {
   }
 }
